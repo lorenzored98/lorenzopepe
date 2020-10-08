@@ -11,7 +11,7 @@
     "@mdx-js/loader": "^1.5.9",
     "@next/mdx": "^9.5.1",
     "dayjs": "^1.8.25",
-    "next": "^9.5.1",
+    "next": "^9.5.4",
     "prism-react-renderer": "^1.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
