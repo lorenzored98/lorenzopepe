@@ -38,24 +38,38 @@ const CodeBlockWrapper: React.FC<CodeBlockWrapperProps> = ({
 	const ref = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				const target = entry.target.querySelector(
+		let observer: IntersectionObserver;
+		if (typeof IntersectionObserver === "function") {
+			observer = new IntersectionObserver(
+				([entry]) => {
+					const target = entry.target.querySelector(
+						".code-scrollable code"
+					) as HTMLElement;
+					if (entry.isIntersecting) {
+						target.style.display = "";
+					} else {
+						target.style.display = "none";
+					}
+				},
+				{ rootMargin: "200px 0px 0px 0px" }
+			);
+			if (ref.current) {
+				observer.observe(ref.current);
+			}
+		} else {
+			if (ref.current) {
+				const target = ref.current.querySelector(
 					".code-scrollable code"
 				) as HTMLElement;
-				if (entry.isIntersecting) {
-					target.style.display = "";
-				} else {
-					target.style.display = "none";
-				}
-			},
-			{ rootMargin: "200px 0px 0px 0px" }
-		);
-		if (ref.current) {
-			observer.observe(ref.current);
+
+				target.style.display = "";
+			}
 		}
+
 		return () => {
-			observer.disconnect();
+			if (observer) {
+				observer.disconnect();
+			}
 		};
 	}, [ref]);
 
