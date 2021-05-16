@@ -1,26 +1,99 @@
 import { FileInfo } from "./FileInfo";
-import { Children, ReactNode, ReactElement } from "react";
+import React, {
+	Children,
+	ReactNode,
+	useRef,
+	useState,
+	useEffect,
+	createElement,
+	CSSProperties,
+} from "react";
 import { paramsFromMetastring } from "../../utils/code";
 
-interface CodeBlockProps {
+const Line: React.FC<{ highlight?: boolean }> = ({ highlight, children }) => (
+	<div className={highlight ? "code-line highlighted" : "code-line"}>
+		{children}
+	</div>
+);
+
+const Number: React.FC = ({ children }) => (
+	<span className="line-number">{children}</span>
+);
+
+interface CodeBlockWrapperProps {
 	background: string;
 	language: string;
 	metastring: string;
 }
 
-const CodeBlock: React.FC<CodeBlockProps> = ({
+const CodeBlockWrapper: React.FC<CodeBlockWrapperProps> = ({
 	background,
 	language,
 	metastring,
 	children,
 }) => {
-	const { numbered, linesHighlighted, filePath } = paramsFromMetastring(
-		metastring
+	const { numbered, linesHighlighted, filePath } =
+		paramsFromMetastring(metastring);
+
+	const ref = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				const target = entry.target.querySelector(
+					".code-scrollable code"
+				) as HTMLElement;
+				if (entry.isIntersecting) {
+					target.style.display = "";
+				} else {
+					target.style.display = "none";
+				}
+			},
+			{ rootMargin: "200px 0px 0px 0px" }
+		);
+		if (ref.current) {
+			observer.observe(ref.current);
+		}
+		return () => {
+			observer.disconnect();
+		};
+	}, [ref]);
+
+	return (
+		<div className="code-wrapper" ref={ref}>
+			<FileInfo
+				language={language.replace("language-", "")}
+				pathName={filePath}
+			/>
+			<StaticCodeBlockContent
+				element="div"
+				className="code-scrollable"
+				style={{
+					background: background.split(":")[1],
+				}}
+			>
+				<CodeBlockContent
+					numbered={numbered}
+					linesHighlighted={linesHighlighted}
+				>
+					{children}
+				</CodeBlockContent>
+			</StaticCodeBlockContent>
+		</div>
 	);
+};
 
-	// extract code from nodes ?
-	let code = "";
+interface CodeBlockContentProps {
+	numbered: boolean;
+	linesHighlighted: number[];
+}
 
+// Runs server only since it's wrapped around static component
+const CodeBlockContent: React.FC<CodeBlockContentProps> = ({
+	numbered,
+	linesHighlighted,
+	children,
+}) => {
 	// create arrays of arrays wit only spans inside
 	const linesArr: ReactNode[][] = [[]];
 
@@ -29,16 +102,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
 		if (typeof child === "string") {
 			linesArr.push([]);
-			// add to code
-			code += child;
 		} else {
 			if (linesArr[index]) {
 				linesArr[index].push(child);
-			}
-
-			// add content to code
-			if (child && typeof child === "object") {
-				code += (child as ReactElement).props.children;
 			}
 		}
 	});
@@ -56,43 +122,66 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 			  ]
 			: linesArr[i];
 
-		linesNodes.push(
-			<Line
-				key={`line-${lineIndex}`}
-				highlight={linesHighlighted.indexOf(lineIndex) > -1}
-			>
-				{childs}
-			</Line>
-		);
+		if (linesArr[i].length) {
+			linesNodes.push(
+				<Line
+					key={`line-${lineIndex}`}
+					highlight={linesHighlighted.indexOf(lineIndex) > -1}
+				>
+					{childs}
+				</Line>
+			);
+		}
 	}
 
 	return (
-		<div className="code-wrapper">
-			<FileInfo
-				language={language.replace("language-", "")}
-				code={code}
-				pathName={filePath}
-			/>
-			<div
-				className="code-scrollable"
-				style={{ background: background.split(":")[1] }}
-			>
-				<pre>
-					<code>{linesNodes}</code>
-				</pre>
-			</div>
-		</div>
+		<pre
+			style={{
+				// Hacky at best
+				height: linesNodes.length * 24 + "px",
+			}}
+		>
+			<code style={{ display: "none" }}>{linesNodes}</code>
+		</pre>
 	);
 };
 
-export default CodeBlock;
+// Try to enforce SSR only with this hack.
+// // https://stackoverflow.com/questions/55393226/disable-hydration-only-partially-hydrate-a-next-js-app
+interface StaticCodeBlockContent {
+	element: string;
+	className?: string;
+	style?: CSSProperties;
+}
 
-const Line: React.FC<{ highlight?: boolean }> = ({ highlight, children }) => (
-	<div className={highlight ? "code-line highlighted" : "code-line"}>
-		{children}
-	</div>
-);
+const StaticCodeBlockContent: React.FC<StaticCodeBlockContent> = ({
+	element,
+	className,
+	style,
+	children,
+}) => {
+	const ref = useRef<HTMLElement | null>(null);
+	const [render, setRender] = useState(typeof window === "undefined");
 
-const Number: React.FC = ({ children }) => (
-	<span className="line-number">{children}</span>
-);
+	useEffect(() => {
+		const isEmpty = ref.current?.innerHTML === "";
+
+		if (isEmpty) {
+			setRender(true);
+		}
+	}, [ref]);
+
+	if (render) {
+		return createElement(element, { children, className, style });
+	}
+
+	return createElement(element, {
+		className,
+		ref,
+		style,
+		suppressHydrationWarning: true,
+		dangerouslySetInnerHTML: { __html: "" },
+	});
+};
+
+export default CodeBlockWrapper;
