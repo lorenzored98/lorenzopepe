@@ -5,7 +5,6 @@ import { Emoji } from "../Emoji";
 interface FileInfoProps {
 	language: string;
 	pathName?: string;
-	code: string;
 }
 
 // https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
@@ -24,15 +23,10 @@ function iOS() {
 	);
 }
 
-export const FileInfo: React.FC<FileInfoProps> = ({
-	language,
-	pathName,
-	code,
-}) => {
+export const FileInfo: React.FC<FileInfoProps> = ({ language, pathName }) => {
 	const copiedRef = useRef<boolean>(false);
-	const [copyMessageRef, setCopyMessageRef] = useState<HTMLDivElement | null>(
-		null
-	);
+	const [copyMessageRef, setCopyMessageRef] =
+		useState<HTMLDivElement | null>(null);
 
 	return (
 		<div className="file-info">
@@ -42,10 +36,12 @@ export const FileInfo: React.FC<FileInfoProps> = ({
 			{pathName && <span aria-label="File Name">{pathName}</span>}
 			<button
 				onClick={(e) => {
+					const test = extractCode(e.currentTarget);
+
 					if (!copiedRef.current) {
 						const textarea = document.createElement("textarea");
 						textarea.style.fontSize = "16px";
-						textarea.value = code;
+						textarea.value = test;
 						// prevent weird scrolling when focused
 						textarea.readOnly = true;
 						document.body.appendChild(textarea);
@@ -99,6 +95,31 @@ interface CopyNotificationProps {
 		React.SetStateAction<HTMLDivElement | null>
 	>;
 }
+
+const extractCode = (target: HTMLButtonElement): string => {
+	const elem = target.parentElement?.parentElement
+		?.querySelector("pre")
+		?.querySelector("code");
+
+	if (!elem) return "";
+
+	let code = "";
+
+	for (let i = 0; i < elem.childNodes.length; i++) {
+		const node = elem.childNodes[i];
+
+		for (let j = 0; j < node.childNodes.length; j++) {
+			const elem = node.childNodes[j] as HTMLElement;
+
+			if (elem.className !== "line-number") {
+				code += elem.innerText;
+			}
+		}
+		code += "\n";
+	}
+
+	return code.trimEnd();
+};
 
 const CopyNotification: React.FC<CopyNotificationProps> = ({
 	setCopyMessageRef,
