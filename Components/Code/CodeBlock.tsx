@@ -83,7 +83,7 @@ const CodeBlockWrapper: React.FC<CodeBlockWrapperProps> = ({
 				element="div"
 				className="code-scrollable"
 				style={{
-					background: background.split(":")[1],
+					background,
 				}}
 			>
 				<CodeBlockContent

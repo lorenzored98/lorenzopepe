@@ -9,30 +9,31 @@
 		"analyze": "set ANALYZE=true&& next build"
 	},
 	"dependencies": {
-		"@mdx-js/loader": "^1.6.22",
-		"@next/mdx": "^9.5.5",
+		"@mdx-js/loader": "^2.0.0-next.9",
+		"@mdx-js/mdx": "^2.0.0-next.9",
+		"@next/mdx": "^10.2.0",
 		"next": "^10.2.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"rehype-shiki": "0.0.9",
-		"sass": "^1.32.12",
+		"sass": "^1.32.13",
 		"shiki": "^0.9.3"
 	},
 	"devDependencies": {
-		"@next/bundle-analyzer": "^9.5.5",
-		"@types/node": "^14.14.44",
-		"@types/react": "^16.14.6",
-		"@types/react-dom": "^16.9.12",
-		"@typescript-eslint/eslint-plugin": "^3.10.1",
-		"@typescript-eslint/parser": "^3.10.1",
+		"@next/bundle-analyzer": "^10.2.0",
+		"@types/node": "^15.3.0",
+		"@types/react": "^17.0.6",
+		"@types/react-dom": "^17.0.5",
+		"@typescript-eslint/eslint-plugin": "^4.24.0",
+		"@typescript-eslint/parser": "^4.24.0",
 		"eslint": "^7.26.0",
-		"eslint-config-prettier": "^6.15.0",
+		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-jsx-a11y": "^6.4.1",
 		"eslint-plugin-prettier": "^3.4.0",
 		"eslint-plugin-react": "^7.23.2",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"node-fetch": "^2.6.1",
 		"prettier": "^2.3.0",
-		"typescript": "^3.9.9"
+		"typescript": "^4.2.4"
 	}
 }

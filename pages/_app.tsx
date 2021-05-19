@@ -12,7 +12,7 @@ import "../styles/main.scss";
 const mdxComponents = {
 	pre: (props: any) => (
 		<CodeBlock
-			background={props.style[0]}
+			background={props.style.background}
 			language={props.children.props.className}
 			metastring={props.children.props.metastring}
 		>
