@@ -33,21 +33,6 @@ export const useDarkMode = (): ReturnProps => {
 		setDarkMode(!!darkModeVal);
 	}, []);
 
-	// dev only toggle fast between modes
-	useEffect(() => {
-		if (process.env.NODE_ENV === "development") {
-			const toggle = (e: KeyboardEvent) => {
-				if (e.key.toLowerCase() === "l") {
-					setDarkMode(!darkMode);
-				}
-			};
-
-			window.addEventListener("keydown", toggle);
-
-			return () => window.removeEventListener("keydown", toggle);
-		}
-	});
-
 	return [darkMode, setDarkMode];
 };
 
