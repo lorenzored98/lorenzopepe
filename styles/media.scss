@@ -121,13 +121,20 @@
 	.blog-post-list-preview {
 		article {
 			grid-template-rows: repeat(3, minmax(min-content, max-content));
-			grid-template-columns: unset;
+			grid-template-columns: 1fr;
+			margin: 0 auto;
 
 			.date {
 				grid-row: 3 / 4;
-				justify-self: flex-end;
-				margin-top: 0.6rem;
+				justify-self: flex-start;
+				margin: 0.6rem 1rem 0rem 1rem;
 			}
+		}
+	}
+
+	@media (orientation: landscape) {
+		#__next {
+			max-width: 60rem;
 		}
 	}
 }
