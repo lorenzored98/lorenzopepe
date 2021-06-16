@@ -12,7 +12,7 @@
 		"@mdx-js/loader": "^2.0.0-next.9",
 		"@mdx-js/mdx": "^2.0.0-next.9",
 		"@next/mdx": "^10.2.0",
-		"next": "^10.2.0",
+		"next": "^11.0.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"rehype-shiki": "0.0.9",
@@ -34,6 +34,6 @@
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"node-fetch": "^2.6.1",
 		"prettier": "^2.3.0",
-		"typescript": "^4.2.4"
+		"typescript": "^4.3.2"
 	}
 }

@@ -1,3 +1,9 @@
+import blogCoverImage from "../../public/images/blog/react_color_picker.jpg";
+import colorPickerSketchImage from "../../public/images/blog/colorpicker_sketch.png";
+import hsvImage from "../../public/images/blog/hsv.png";
+import pointerEventsImage from "../../public/images/blog/pointer_events.png";
+import touchMoveErrorImage from "../../public/images/blog/touchmove_error.png";
+
 import { PostHeader } from "../../Components/Blog/PostHeader";
 import { PostImage } from "../../Components/Blog/PostImage";
 import { PostFooter } from "../../Components/Blog/PostFooter";
@@ -10,35 +16,30 @@ import { ColorPickerDemo, UnstyledRangesDemo, StyledHueRangeDemo, StyledAlphaRan
 export const images = [
 	{
 		alt: "A Color palette",
-		src: "/images/blog/react_color_picker.jpg",
-		placeholderSvg: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 163'%3e%3cdefs/%3e%3cfilter id='a'%3e%3cfeGaussianBlur stdDeviation='12'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' fill='%2338543e'/%3e%3cg filter='url(%23a)'%3e%3cg fill-opacity='.5' transform='translate(.6 .6) scale(1.17188)'%3e%3ccircle cx='107' cy='56' r='174' fill='%23ffce8a'/%3e%3cellipse cx='183' cy='43' fill='%23001f40' rx='61' ry='24'/%3e%3cellipse cx='37' cy='108' fill='%23fdb36a' rx='73' ry='138'/%3e%3cellipse cx='169' cy='131' fill='%23ffffd0' rx='159' ry='10'/%3e%3cpath fill='%23003c47' d='M130 104l113 24-5-31z'/%3e%3cellipse cx='87' cy='42' fill='%238e3e39' rx='76' ry='20'/%3e%3ccircle r='1' fill='%23216e8d' transform='matrix(24.03964 2.48896 -5.24722 50.68024 159.2 70.3)'/%3e%3cellipse cx='123' fill='%23ffd625' rx='255' ry='16'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e",
+		src: blogCoverImage,
 	},
 	{
 		alt: "Color picker sketch",
-		src: "/images/blog/colorpicker_sketch.png",
-		placeholderSvg: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 207'%3e%3cdefs/%3e%3cfilter id='a'%3e%3cfeGaussianBlur stdDeviation='12'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' fill='%233e2222'/%3e%3cg filter='url(%23a)'%3e%3cg fill-opacity='.5' transform='translate(.6 .6) scale(1.17188)'%3e%3ccircle cx='156' cy='93' r='190' fill='white'/%3e%3ccircle cx='165' cy='75' r='198' fill='white'/%3e%3ccircle r='1' fill='white' transform='matrix(74.4875 -4.38144 10.55623 179.46306 187.6 93)'/%3e%3ccircle r='1' fill='%23fffcf6' transform='matrix(-103.36702 -232.63319 38.71194 -17.20106 25.4 128.1)'/%3e%3cellipse cx='67' cy='87' fill='%23511819' rx='50' ry='8'/%3e%3cellipse cx='68' cy='48' fill='%23ffa7a7' rx='49' ry='34'/%3e%3cellipse cx='152' cy='27' fill='%23ff9898' rx='65' ry='14'/%3e%3cpath fill='%23df5355' d='M54.7 143.7l69.7-2.3-12.9 15.3-78.3-1.4z'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e",
+		src: colorPickerSketchImage,
 		width: 740,
 		height: 511
 	},
 		{
 		alt: "HSV 3D representation",
-		src: "/images/blog/hsv.png",
-		placeholderColor: "#b0b0b0",
+		src: hsvImage,
 		width: 740,
 		height: 555
 	},
 	{
 		alt: "Pointer Events caniuse",
-		src: "/images/blog/pointer_events.png",
-		placeholderSvg: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 113'%3e%3cdefs/%3e%3cfilter id='a'%3e%3cfeGaussianBlur stdDeviation='12'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' fill='%23284654'/%3e%3cg filter='url(%23a)'%3e%3cg fill-opacity='.5' transform='translate(.6 .6) scale(1.17188)'%3e%3ccircle cx='124' cy='36' r='162' fill='white'/%3e%3ccircle cx='138' cy='34' r='158' fill='%23fffec8'/%3e%3cellipse cx='59' cy='75' fill='%234a5208' rx='55' ry='16'/%3e%3ccircle cx='163' r='77' fill='%23fff4e7'/%3e%3cellipse cx='126' cy='80' fill='%233e5b11' rx='185' ry='4'/%3e%3ccircle r='1' fill='%23ffdacf' transform='matrix(-12.71248 -11.77188 24.49306 -26.4501 42.6 43.5)'/%3e%3cpath fill='%23df3435' d='M36 58h68v12H36z'/%3e%3ccircle r='1' fill='%23ffe8da' transform='matrix(20.8827 -37.7119 41.71112 23.09724 239.4 35.3)'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e",
+		src: pointerEventsImage,
 		width: 740,
 		height: 278,
 		quality: 100
 	},
 	{
 		alt: "Unable to preventDefault inside passive event listener invocation",
-		src: "/images/blog/touchmove_error.png",
-		placeholderColor: "white",
+		src: touchMoveErrorImage,
 		width: 740,
 		height: 120,
 		quality: 100

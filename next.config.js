@@ -33,10 +33,7 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 			];
-		},
-		future: {
-			webpack5: true,
-		},
+		}
 	}),
 	
 );
