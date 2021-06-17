@@ -29,7 +29,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
 	onChange,
 	startColor,
 }) => {
-	const [color, setColor] = React.useState<Color>(
+	const [color, setColor] = React.useState<Color>(() =>
 		validateStartColor(startColor)
 	);
 
