@@ -24,7 +24,7 @@ const About: React.FC = () => {
 				<Socials />
 			</div>
 			<p>
-				I'm a <strong>freelance front-end web developer</strong> born
+				I'm a <strong>freelance front-end developer</strong> born
 				and raised in Italy.
 			</p>
 			<p>
