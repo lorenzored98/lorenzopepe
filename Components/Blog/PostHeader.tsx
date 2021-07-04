@@ -9,6 +9,10 @@ interface PostHeaderProps {
 export const PostHeader: React.FC<PostHeaderProps> = ({ metadata }) => {
 	const { title, description, tags, href, imageSrc, imageAlt } = metadata;
 
+	if (imageSrc.width !== 1200 || imageSrc.height !== 630) {
+		throw new Error("Twitter cards will not work, fix width and height");
+	}
+
 	return (
 		<Fragment>
 			<Head>
