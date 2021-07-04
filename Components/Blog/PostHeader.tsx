@@ -8,6 +8,7 @@ interface PostHeaderProps {
 
 export const PostHeader: React.FC<PostHeaderProps> = ({ metadata }) => {
 	const { title, description, tags, href, imageSrc, imageAlt } = metadata;
+
 	return (
 		<Fragment>
 			<Head>
@@ -20,7 +21,7 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ metadata }) => {
 				<meta name="twitter:creator" content="@lorenzopepe98" />
 				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
-				<meta property="twitter:image" content={imageSrc} />
+				<meta property="twitter:image" content={imageSrc.src} />
 				<meta property="twitter:image:alt" content={imageAlt} />
 
 				{/* OPENGRAPH */}
@@ -30,7 +31,7 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ metadata }) => {
 					property="og:url"
 					content={`https://lorenzopepe.dev/blog${href}`}
 				/>
-				<meta property="og:image" content={imageSrc} />
+				<meta property="og:image" content={imageSrc.src} />
 			</Head>
 			<header>
 				<h1>{title}</h1>

@@ -43,7 +43,7 @@ export interface PostMetadata {
 	href: string;
 	title: string;
 	description: string;
-	imageSrc: string;
+	imageSrc: StaticImageData;
 	imageAlt: string;
 }
 
