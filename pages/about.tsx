@@ -37,15 +37,7 @@ const About: React.FC = () => {
 				<strong>web applications</strong> but I'm also experienced in
 				coding beautiful interactive{" "}
 				<strong>data visualizations</strong> and{" "}
-				<strong>creative experiences</strong> powered by{" "}
-				<LinkTo
-					href="https://gl-experiments.vercel.app/"
-					className="blog-link"
-					label="Link to my webgl experiments website"
-				>
-					WebGL
-				</LinkTo>
-				.
+				<strong>creative experiences</strong> powered by WebGL.
 			</p>
 			<footer>
 				<p>
